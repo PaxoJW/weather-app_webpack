@@ -8,13 +8,14 @@
 </head>
 <body>
     <form>
-        <label for="location">Location:</label>
-        <input type="text" id="location">
+        <label for="location-input">Location:</label>
+        <input type="text" id="location-input">
         <button>Search</button>
     </form>
     <div id="result">
-        <p>Location:</p>
-        <p>Temperature:</p>
+        <p id="location-display">Location:</p>
+        <p id="temperature">Temperature:</p>
+        <div class="future-results"></div>
     </div>
     <div>
         <img alt="gif representing the weather condition">

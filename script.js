@@ -1,12 +1,15 @@
 const image = document.querySelector("img");
-let locationInput = document.querySelector("input");
+let locationInput = document.querySelector("#location-input");
 const searchBtn = document.querySelector("button");
+const todayTemp = document.querySelector("#temperature");
+const location1 = document.querySelector("#location-display");
 
 searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     const loc = locationInput.value;
     fetchData(loc);
+    
 })
 
 function fetchData(searchWord) {
@@ -16,11 +19,16 @@ function fetchData(searchWord) {
             return response.json();
         })
         .then(function(response){
-            console.log(response);
+            displayData(response);
         })
         .catch(function(err){
             console.log(err);
         });
+}
+
+function displayData(r) {
+    location1.textContent += r.address;
+    todayTemp.textContent += r.currentConditions.temp;
 }
 
 
