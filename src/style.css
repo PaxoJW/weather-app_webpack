@@ -1,0 +1,18 @@
+button {
+    color: red;
+}
+
+ol {
+    text-decoration: none;
+    list-style-type: none;
+    border: 1px solid black;
+    width: 30px;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
