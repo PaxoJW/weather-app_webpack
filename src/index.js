@@ -5,16 +5,24 @@ import loadData from "./data.js";
 const image = document.querySelector("img");
 let locationInput = document.querySelector("#location-input");
 const searchBtn = document.querySelector("button");
-const todayTemp = document.querySelector("#temperature");
+
 const daysDiv = document.querySelector("#result");
-const location1 = document.querySelector("#location-display"); //There is something preventing me from declaring location as a variable
+const locationDisp = document.querySelector("#location-display");
+//There is something preventing me from declaring location as a variable.
+//location is a reserved global object in browsers (window.location) that controls the URL. To avoid conflicts, always use a more specific name like currentLocation or userLocation
+
 
 searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     const loc = locationInput.value;
-    const locationInfo = loadData(loc);
-    displayData(locationInfo);
+    loadData(loc).then(data => {
+        if (data) {
+        console.log("data loaded");
+        displayData(data);
+        }
+    });
+    
     fetchData(loc);
 })
 
@@ -36,9 +44,13 @@ function fetchData(searchWord) {
 }
 
 function displayData(r) {
-    r.array.forEach(day => {
+    console.log(r);
+    daysDiv.innerHTML = "";
+    r.days.forEach(day => {
+        console.log(day);
         const dayDiv = document.createElement("div");
-        day.forEach(info => {
+//need to figure out this piece right here
+        day.map(info => {
             para = document.createElement("p");
             para.textContent = info;
             dayDiv.append(para);
