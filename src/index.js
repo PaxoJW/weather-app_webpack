@@ -17,6 +17,9 @@ const locationDisp = document.querySelector("#location-display");
 let unitMeas = "metric";
 unitSelPara.innerHTML = unitMeas;
 
+//Get this info from the API
+let usefulInfo = ["datetime", "tempmax", "tempmin", "description"];
+
 
 //Logic to show/hide the dropdown menu
 document.addEventListener("click", (e) => {
@@ -91,14 +94,14 @@ function displayData(r) {
     r.days.forEach(day => {
         console.log(day);
         const dayDiv = document.createElement("div");
-//need to figure out this piece right here
-        day.map(info => {
-            para = document.createElement("p");
-            para.textContent = info;
-            dayDiv.append(para);
-        })
+        const html = Object.keys(day).filter(key => usefulInfo.includes(key))
+        .map(key => `<li>${key}: ${day[key]}</li>`)
+        .join(""); //convert the array to a string
+        dayDiv.innerHTML = html;
         daysDiv.append(dayDiv);
+        console.log(dayDiv);
     });
+    document.body.append(daysDiv);
 }
 
 // function displayGif(weatherCond) {
