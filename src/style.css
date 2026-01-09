@@ -1,8 +1,13 @@
-button {
-    color: red;
+#unit-selection-div {
+    display: flex;
 }
 
-ol {
+button#drop-btn {
+    color: red;
+    height: auto;
+}
+
+ul {
     text-decoration: none;
     list-style-type: none;
     border: 1px solid black;
