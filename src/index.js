@@ -4,13 +4,11 @@ import loadData from "./data.js";
 const dropBtn = document.querySelector("#drop-btn");
 const dropCont = document.querySelector("ul");
 const optionsBtn = document.querySelectorAll("ul>button");
-const image = document.querySelector("img");
 let locationInput = document.querySelector("#location-input");
 const searchBtn = document.querySelector("form>button");
 const unitSelPara = document.querySelector("p#unit-selected");
 
 const daysDiv = document.querySelector("#result");
-const locationDisp = document.querySelector("#location-display");
 //There is something preventing me from declaring location as a variable.
 //location is a reserved global object in browsers (window.location) that controls the URL. To avoid conflicts, always use a more specific name like currentLocation or userLocation
 
@@ -65,28 +63,8 @@ searchBtn.addEventListener("click", (e) => {
         .catch(function(err){
             console.log(err);
         });
-    
-    //fetchData(loc);
 })
 
-
-// //Functions to be run inside the search logic
-// function fetchData(searchWord) {
-//     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchWord}?unitGroup=metric&key=8T66TCLY9TNX9XGXYAWRLG6FJ&contentType=json`)
-//     //we must return the json and then log the response to the console to see the data
-//         .then(function(response){
-//             return response.json();
-//         })
-//         .then(function(response){
-//             displayData(response);
-//             console.log(response);
-//             console.log(response.currentConditions.icon);
-//             displayGif(response.currentConditions.icon);
-//         })
-//         .catch(function(err){
-//             console.log(err);
-//         });
-// }
 
 function displayData(r) {
     console.log(r);
@@ -94,6 +72,7 @@ function displayData(r) {
     r.days.forEach(day => {
         console.log(day);
         const dayDiv = document.createElement("div");
+        dayDiv.classList = "day";
         const html = Object.keys(day).filter(key => usefulInfo.includes(key))
         .map(key => `<li>${key}: ${day[key]}</li>`)
         .join(""); //convert the array to a string
@@ -103,18 +82,3 @@ function displayData(r) {
     });
     document.body.append(daysDiv);
 }
-
-// function displayGif(weatherCond) {
-//     fetch(`https://api.giphy.com/v1/gifs/translate?api_key=BpNNwaH2DUzqkVbCtJ9SWSDpKaxy9HOl&s=${weatherCond}`)
-//         .then(function(gifResponse){
-//             return gifResponse.json();
-//         })
-//         .then(function(gifResponse){
-//             image.src = gifResponse.data.images.downsized.url;
-//             image.parentElement.classList = "visible";
-//             console.log(gifResponse);
-//         })
-//         .catch(function(err){
-//             console.log(err);
-//         })
-// }
